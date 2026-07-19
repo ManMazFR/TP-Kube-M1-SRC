@@ -2,7 +2,7 @@
 
 Stack MySQL 8 + phpMyAdmin déployée en YAML sur un cluster kind 3 nœuds.
 Sécurité : Secret (mot de passe), ConfigMap (config PMA), NetworkPolicy (isolation MySQL),
-persistance via PVC, 2 replicas phpMyAdmin.
+persistance via PVC, 1 replicas phpMyAdmin.
 
 ## 1. Créer le cluster (3 nœuds + Calico)
 
@@ -29,11 +29,15 @@ Si le 1er apply signale "namespace projet-pma not found", relancer `kubectl appl
 
 ## 4. NetworkPolicy
 
-- DENY  : un pod sans label app=phpmyadmin ne joint PAS mysql:3306 (timeout)
-- ALLOW : phpMyAdmin joint mysql:3306
+Les communications réseau sont sécurisées à l'aide de plusieurs NetworkPolicies :
+
+- deny-all : bloque tout le trafic par défaut.
+- allow-internal-dns : autorise les requêtes DNS vers CoreDNS.
+- pma-egress-to-mysql : autorise phpMyAdmin à communiquer avec MySQL sur le port 3306.
+- mysql-ingress-from-pma : autorise uniquement phpMyAdmin à accéder à MySQL.
 
 ## Fichiers
 
 - kind-cluster.yaml : cluster 3 noeuds, Calico, port 30080->8080
-- 00-namespace / 01-secret / 02-pvc / 03-mysql-deploy / 04-mysql-svc
-- 05-pma-configmap / 06-pma-deploy / 07-pma-svc (NodePort) / 08-networkpolicy
+- namespace / secret / pvc / mysql-deploy / mysql-svc
+- pma-configmap / pma-deploy / pma-svc (NodePort) / networkpolicy
