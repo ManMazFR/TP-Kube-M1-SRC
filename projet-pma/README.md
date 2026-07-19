@@ -50,7 +50,7 @@ Détruire le pod MySQL et attendre le nouveau :
 Recharger phpMyAdmin et rejouer `SELECT * FROM preuve;`
 → la ligne est toujours là : les données vivent sur le PVC, pas dans le conteneur.
 
-### 3.3 NetworkPolicies — capture `02-networkpolicy-blocked.png`
+### 3.3 NetworkPolicies — capture `networkpolicy-blocked.png`
 
 Chemin autorisé (phpMyAdmin porte le label `app=phpmyadmin`) :
 
@@ -66,7 +66,7 @@ Chemin bloqué (pod tiers sans le bon label) :
 
 → capture du `timed out`. Même cible, deux pods, deux résultats : seul le label change.
 
-### 3.4 Kite (GUI cluster) — capture `03-kite.png`
+### 3.4 Kite (GUI cluster) — capture `kite.png`
 
     kubectl apply -f https://raw.githubusercontent.com/kite-org/kite/main/deploy/install.yaml
     kubectl get pod -A | grep kite                  # repérer le namespace réel
