@@ -23,7 +23,7 @@ Si le 1er apply signale "namespace projet-pma not found", relancer `kubectl appl
 ## 3. Tester
 
 1. Ouvrir http://localhost:8080 (login phpMyAdmin)
-2. Serveur = mysql, utilisateur = root, mot de passe = ceciestmonmdp!
+2. Serveur = mysql, utilisateur = root, mot de passe = Rose-MySQL-2026!
 3. Créer une base de test, y insérer des données
 4. Persistance : `kubectl -n projet-pma delete pod -l app=mysql` -> le pod redémarre, données conservées
 
