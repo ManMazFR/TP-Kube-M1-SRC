@@ -11,6 +11,7 @@ Namespace : `projet-pma` · phpMyAdmin en `replicas: 1` (sessions PHP sur disque
 Calico est nécessaire : le CNI par défaut de kind n'applique pas les NetworkPolicy
 sur cette version. Le fichier `kind-cluster.yaml` est à la racine du dépôt.
 
+    kind delete cluster --name esgi          # si un cluster esgi existe déjà
     kind create cluster --config ../kind-cluster.yaml --name esgi
     kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.4/manifests/calico.yaml
     kubectl wait -n kube-system --for=condition=ready pod -l k8s-app=calico-node --timeout=180s
