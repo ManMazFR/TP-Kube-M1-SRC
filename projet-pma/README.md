@@ -1,4 +1,4 @@
-# Projet — phpMyAdmin + MySQL sur Kubernetes (kind)
+# phpMyAdmin + MySQL sur Kubernetes (kind)
 
 Stack MySQL 8 + phpMyAdmin déployée en YAML sur un cluster kind 3 nœuds.
 Sécurité : Secret (mot de passe), ConfigMap (config PMA), 5 NetworkPolicies
